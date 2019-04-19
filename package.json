@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "node scripts/install.js"
   },
-  "devDependencies": {
-    "download": "^7.1.0"
+  "dependencies": {
+    "extract-zip": "^1.6.7"
   }
 }

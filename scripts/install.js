@@ -1,5 +1,8 @@
-const download = require("download");
 const os = require("os");
+const fs = require("fs");
+const path = require("path");
+const https = require("https");
+const extract = require("extract-zip");
 
 const { WIDEVINECDM_VERSION } = require("../src/constants");
 const SYSTEM_ARCH = os.arch();
@@ -21,11 +24,32 @@ switch (SYSTEM_PLATFORM) {
 }
 
 // Download Widevine
-download(DOWNLOAD_URL, "widevine", {
-  // TEMP: path.resolve(__dirname, "widevine")
-  extract: true
-}).catch(() => {
-  console.error(
-    "Error downloading Widevine. Your OS or Arch may not be supported or your internet connection was interrupted!"
-  );
-});
+const zipDest = path.join(
+  os.tmpdir(),
+  `widevinecdm-${process.pid}-${Date.now()}.zip`
+);
+const widevineDest = path.resolve(__dirname, "widevine");
+
+const file = fs.createWriteStream(zipDest);
+https
+  .get(DOWNLOAD_URL, response => {
+    response.pipe(file);
+    file.on("finish", () => {
+      file.close(() => {
+        // close() is async, call function after close completes.
+        extract(zipDest, { dir: widevineDest }, err => {
+          fs.unlinkSync(zipDest);
+          if (err) {
+            console.error("Error extracting Widevine. Error: ", err);
+            return;
+          }
+
+          console.log("Retrieved Widevine Successfully");
+        });
+      });
+    });
+  })
+  .on("error", err => {
+    fs.unlinkSync(zipDest); // Delete the file async. (But we don't check the result)
+    console.error("Error downloading Widevine. Error: ", err);
+  });
