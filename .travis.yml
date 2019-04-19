@@ -1,0 +1,12 @@
+language: node_js
+node_js: node # Latest Stable Version
+
+os:
+  - osx
+  # TODO: Linux + Windows
+
+# install: yarn --pure-lockfile
+
+# script:
+#   - yarn test
+#   - if [ "$TRAVIS_TAG" ]; then yarn build; fi
