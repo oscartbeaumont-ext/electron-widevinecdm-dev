@@ -1,0 +1,17 @@
+{
+  "name": "electron-widevine-example",
+  "version": "1.0.0",
+  "description": "A minimal example applications for Widevine with Electron",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "NODE_ENV=test mocha"
+  },
+  "devDependencies": {
+    "electron": "^4.1.4",
+    "electron-widevinecdm": "../",
+    "mocha": "^6.1.4",
+    "spectron": "^5.0.0"
+  }
+}

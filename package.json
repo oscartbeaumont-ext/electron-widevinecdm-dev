@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "test": "echo 'TODO'"
+    "test": "cd example && yarn && yarn test"
   },
   "dependencies": {
     "extract-zip": "^1.6.7"
