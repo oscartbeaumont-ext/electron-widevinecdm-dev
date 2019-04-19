@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "NODE_ENV=test mocha"
+    "test": "mocha"
   },
   "devDependencies": {
     "electron": "^4.1.4",

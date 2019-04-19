@@ -9,7 +9,10 @@ describe('Application launch', function() {
   beforeEach(function() {
     this.app = new Application({
       path: electronPath,
-      args: [path.join(__dirname, '..')]
+      args: [path.join(__dirname, '..')],
+      env: {
+        NODE_ENV: 'test' // Tell the process it is running as a test
+      }
     });
     return this.app.start();
   });
