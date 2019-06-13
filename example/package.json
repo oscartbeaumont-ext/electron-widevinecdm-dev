@@ -9,7 +9,7 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "electron": "^4.1.4",
+    "electron": "^4.2.4",
     "electron-widevinecdm": "../",
     "mocha": "^6.1.4",
     "spectron": "^5.0.0"
